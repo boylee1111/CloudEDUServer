@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace CloudEDUServer
 {
@@ -26,7 +25,7 @@ namespace CloudEDUServer
             return courses;
         }
 
-         public static COURSE[] GetAllPendingCourses()
+        public static COURSE[] GetAllPendingCourses()
         {
             COURSE_PENDING[] courses = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
@@ -34,7 +33,7 @@ namespace CloudEDUServer
                 courses = ctx.COURSE_PENDING.ToArray();
             }
 
-            COURSE[] returnCourse=new COURSE[courses.Length];
+            COURSE[] returnCourse = new COURSE[courses.Length];
             for (int i = 0; i < courses.Length; i++)
             {
                 returnCourse[i] = ConvertToCourse(courses[i]);
@@ -107,8 +106,8 @@ namespace CloudEDUServer
             COURSE course = null;
             using (CloudEDUEntities ctx = new CloudEDUEntities())
             {
-            
-                course=ctx.COURSEs.Where(c=>c.ID==course_id).FirstOrDefault();
+
+                course = ctx.COURSEs.Where(c => c.ID == course_id).FirstOrDefault();
             }
             return course;
         }
@@ -371,7 +370,7 @@ namespace CloudEDUServer
                 {
                     COURSE course = ctx.COURSEs.Where(c => c.ID == course_id).FirstOrDefault();
                     course.COURSE_STATUS = state.ToString();
-                    ctx.Entry(course).State = System.Data.EntityState.Modified;
+                    ctx.Entry(course).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -396,7 +395,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(course).State = System.Data.EntityState.Modified;
+                    ctx.Entry(course).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -453,7 +452,7 @@ namespace CloudEDUServer
                     var rc = ctx.RECOMMENDATIONs.Include("COURSEs").Where(r => r.ID == reco.ID).FirstOrDefault();
                     var cs = ctx.COURSEs.Where(c => c.ID == course.ID).FirstOrDefault();
                     rc.COURSEs.Add(cs);
-                    ctx.Entry(rc).State = System.Data.EntityState.Modified;
+                    ctx.Entry(rc).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -466,7 +465,7 @@ namespace CloudEDUServer
             return true;
         }
 
-        
+
         private static bool AddLessonsToCourse(LESSON[] lessons, COURSE course)
         {
             using (CloudEDUEntities ctx = new CloudEDUEntities())
@@ -476,7 +475,7 @@ namespace CloudEDUServer
                     var cs = ctx.COURSEs.Include("LESSONs").Where(c => c.ID == course.ID).FirstOrDefault();
                     foreach (LESSON ls in lessons)
                         cs.LESSONs.Add(ls);
-                    ctx.Entry(cs).State = System.Data.EntityState.Modified;
+                    ctx.Entry(cs).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -495,7 +494,7 @@ namespace CloudEDUServer
                 var ls = ctx.LESSONs.Include("RESOURCEs").Where(l => l.ID == lesson.ID).FirstOrDefault();
                 foreach (RESOURCE rs in res)
                     ls.RESOURCEs.Add(rs);
-                ctx.Entry(ls).State = System.Data.EntityState.Modified;
+                ctx.Entry(ls).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
             return true;
@@ -509,7 +508,7 @@ namespace CloudEDUServer
                 try
                 {
                     ctx.Set<NOTE>().Attach(note);
-                    ctx.Entry(note).State = System.Data.EntityState.Modified;
+                    ctx.Entry(note).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -527,7 +526,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(category).State = System.Data.EntityState.Modified;
+                    ctx.Entry(category).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -545,7 +544,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(reco).State = System.Data.EntityState.Modified;
+                    ctx.Entry(reco).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -696,7 +695,7 @@ namespace CloudEDUServer
             return true;
         }
 
-        
+
 
         #endregion
 

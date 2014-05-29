@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using System.Data;
 
 namespace CloudEDUServer
 {
@@ -86,7 +84,7 @@ namespace CloudEDUServer
         public static string getPermissionStringByManager(MANAGER manager)
         {
             PERMISSION[] permissions = GetPermissionsByManager(manager);
-            string permissionString="";
+            string permissionString = "";
             for (int i = 0; i < permissions.Length; i++)
             {
                 permissionString += permissions[i].NAME + ' ';
@@ -251,7 +249,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.Entry(manager).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -274,7 +272,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(permission).State = System.Data.EntityState.Modified;
+                    ctx.Entry(permission).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -297,7 +295,7 @@ namespace CloudEDUServer
             {
                 try
                 {
-                    ctx.Entry(type).State = System.Data.EntityState.Modified;
+                    ctx.Entry(type).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -322,7 +320,7 @@ namespace CloudEDUServer
                 try
                 {
                     manager.MNGR_TYPE = type;
-                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.Entry(manager).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -352,7 +350,7 @@ namespace CloudEDUServer
                     //System.Diagnostics.Debug.WriteLine(ctx.Entry(manager).State);
                     //System.Diagnostics.Debug.WriteLine(ctx.Entry(perm).State);
                     manager.PERMISSIONs.Add(perm);
-                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.Entry(manager).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -381,7 +379,7 @@ namespace CloudEDUServer
                     //System.Diagnostics.Debug.WriteLine(ctx.Entry(manager).State);
                     //System.Diagnostics.Debug.WriteLine(ctx.Entry(perm).State);
                     manager.PERMISSIONs.Remove(perm);
-                    ctx.Entry(manager).State = System.Data.EntityState.Modified;
+                    ctx.Entry(manager).State = EntityState.Modified;
                     ctx.SaveChanges();
                 }
                 catch (Exception e)
@@ -488,7 +486,7 @@ namespace CloudEDUServer
             }
             catch
             {
-                return false; 
+                return false;
             }
         }
 

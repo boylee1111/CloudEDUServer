@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace CloudEDUServer
 {
@@ -54,16 +52,16 @@ namespace CloudEDUServer
 
         public static string dateToString(string date)
         {
-            string str = date.Substring(0, 4)+'-';
+            string str = date.Substring(0, 4) + '-';
             date = date.Remove(0, 5);
             if (date[1] == '/')
             {
-                str = str + '0' + date[0]+'-';
+                str = str + '0' + date[0] + '-';
                 date = date.Remove(0, 2);
             }
             else
             {
-                str = str + date.Substring(0, 1)+'-';
+                str = str + date.Substring(0, 1) + '-';
                 date = date.Remove(0, 3);
             }
             if (date.Length == 1)

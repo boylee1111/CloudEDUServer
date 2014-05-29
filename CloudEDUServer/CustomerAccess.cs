@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace CloudEDUServer
 {
@@ -23,7 +22,7 @@ namespace CloudEDUServer
         {
             try
             {
-                ctx.Entry(customer).State = System.Data.EntityState.Modified;
+                ctx.Entry(customer).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
             catch (Exception e)
