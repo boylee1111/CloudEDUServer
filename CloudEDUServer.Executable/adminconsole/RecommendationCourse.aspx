@@ -76,7 +76,7 @@
         });
 
         function editRecommendation(id) {
-            jQuery.post("RecommendationCourse.aspx", {operate:"editRecommendation", id: id }, function () {
+            jQuery.post("RecommendationCourse.aspx", { operate: "editRecommendation", id: id }, function () {
                 window.showModalDialog("ShowRecommendationCourse.aspx");
             });
         }
@@ -156,14 +156,13 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                    Recommendation List                   
+                <h2>Recommendation List                   
                 </h2>
                 <br />
-                 <button onclick="showNewRecommendation()" style="float:right" id="showNewRecommendationButton">Add Recommendation</button>
-                <br/>
+                <button onclick="showNewRecommendation()" style="float: right" id="showNewRecommendationButton">Add Recommendation</button>
                 <br />
-                <table id="NewRecommendation" style="float:right; display:none; z-index:100;">
+                <br />
+                <table id="NewRecommendation" style="float: right; display: none; z-index: 100;">
                     <tr>
                         <td class="col1">
                             <label>Title</label>
@@ -172,19 +171,18 @@
                             <input type="text" id="NewRecommendationTitle" />
                         </td>
                     </tr>
-                   <tr>
-                       <td class="col1">
-                           <label>Description</label>
+                    <tr>
+                        <td class="col1">
+                            <label>Description</label>
                         </td>
                         <td class="col2">
                             <input type="text" id="NewRecommendationDescription" />
                         </td>
                     </tr>
-                  
+
                     <tr>
-                        <td>
-                        </td>
-                        <td style="text-align:right">
+                        <td></td>
+                        <td style="text-align: right">
                             <button onclick="submitNewRecommendation()">确认</button>
                         </td>
                     </tr>

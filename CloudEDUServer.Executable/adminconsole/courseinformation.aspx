@@ -6,8 +6,8 @@
 <head runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Typography | BlueWhale Admin</title>
-    
-        <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -66,11 +66,11 @@
 
     <script type="text/javascript">
 
-      $(document).ready(function () {
-          setupLeftMenu();
-          setSidebarHeight();
-      });
-     </script>
+        $(document).ready(function () {
+            setupLeftMenu();
+            setSidebarHeight();
+        });
+    </script>
 
 </head>
 <body>
@@ -78,8 +78,7 @@
         <!--#include file="Navigation.aspx" -->
         <div class="grid_10">
             <div class="box round first">
-                <h2>
-                    Typography</h2>
+                <h2>Typography</h2>
                 <div class="block">
                     <!-- paragraphs -->
                     <p class="start">
@@ -90,7 +89,8 @@
                         five centuries, but also the leap into electronic typesetting, remaining essentially
                         unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
                         Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                        PageMaker including versions of Lorem Ipsum.</p>
+                        PageMaker including versions of Lorem Ipsum.
+                    </p>
                     <p>
                         It is a long established fact that a reader will be distracted by the readable content
                         of a page when looking at its layout. The point of using Lorem Ipsum is that it
@@ -99,7 +99,8 @@
                         packages and web page editors now use Lorem Ipsum as their default model text, and
                         a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
                         versions have evolved over the years, sometimes by accident, sometimes on purpose
-                        (injected humour and the like).</p>
+                        (injected humour and the like).
+                    </p>
                     <p>
                         Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
                         in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
@@ -116,7 +117,8 @@
                         The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
                         interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
                         Cicero are also reproduced in their exact original form, accompanied by English
-                        versions from the 1914 translation by H. Rackham.</p>
+                        versions from the 1914 translation by H. Rackham.
+                    </p>
                     <p class="start">
                         <img src="img/horizontal.jpg" alt="Ginger" class="left" />Lorem ipsum dolor sit
                         amet, consectetur <a href="">adipisicing</a> elit, sed do eiusmod tempor incididunt
@@ -124,25 +126,27 @@
                         ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
                         reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
                         sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.</p>
+                        anim id est laborum.
+                    </p>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                         irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.</p>
+                        deserunt mollit anim id est laborum.
+                    </p>
                     <!-- end paragraphs -->
                     <!-- headings -->
-                    <h5>
-                        Heading</h5>
+                    <h5>Heading</h5>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                         exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
                         irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                        deserunt mollit anim id est laborum.</p>
+                        deserunt mollit anim id est laborum.
+                    </p>
                     <blockquote>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur <a href="">adipisicing</a> elit, sed do
@@ -150,34 +154,32 @@
                             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                             fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                            qui officia deserunt mollit anim id est laborum.</p>
+                            qui officia deserunt mollit anim id est laborum.
+                        </p>
                     </blockquote>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua.</p>
-                    <h3>
-                        Heading</h3>
+                        incididunt ut labore et dolore magna aliqua.
+                    </p>
+                    <h3>Heading</h3>
                     <ol class="decimal">
                         <li>List Item 1</li>
                         <li>List Item 2</li>
                         <li>List Item 3</li>
                     </ol>
-                    <h4>
-                        Heading</h4>
+                    <h4>Heading</h4>
                     <ul class="disc">
                         <li>List Item 1</li>
                         <li>List Item 2</li>
                         <li>List Item 3</li>
                     </ul>
-                    <h5>
-                        Heading</h5>
+                    <h5>Heading</h5>
                     <ul class="square">
                         <li>List Item 1</li>
                         <li>List Item 2</li>
                         <li>List Item 3</li>
                     </ul>
-                    <h6>
-                        Heading</h6>
+                    <h6>Heading</h6>
                     <ul class="square">
                         <li>List Item 1</li>
                         <li>List Item 2</li>
@@ -197,6 +199,6 @@
             Copyright <a href="#">BlueWhale Admin</a>. All Rights Reserved.
         </p>
     </div>
-    
+
 </body>
 </html>

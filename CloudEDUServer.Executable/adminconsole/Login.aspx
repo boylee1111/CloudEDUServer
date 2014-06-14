@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/nav.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/usercss.css" media="screen" />
-       <link rel="stylesheet" type="text/css" href="css/Login.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/Login.css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" type="text/css" href="css/ie6.css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
     <link href="css/table/demo_page.css" rel="stylesheet" type="text/css" />
@@ -66,9 +66,9 @@
             if (window.innerHeight)
                 winHeight = window.innerHeight - 72 - 36 - 134;
             else if ((document.body) && (document.body.clientHeight))
-                winHeight = document.body.clientHeight-72-36-134;
+                winHeight = document.body.clientHeight - 72 - 36 - 134;
             if (winHeight < 0) winHeight = 0;
-            document.getElementById("loginTopDiv").style.marginTop = winHeight/2+"px";
+            document.getElementById("loginTopDiv").style.marginTop = winHeight / 2 + "px";
             document.getElementById("loginBottomDiv").style.height = winHeight / 2 + "px";
         });
 
@@ -84,34 +84,39 @@
         });
     </script>
 </head>
-<body id="Body1" runat="server"  style="height:100%; width:100%; margin:0 0 0 0">
-    <form id="form1" runat="server" style="height:100%">
-    <div class="container_12">
-        <div class="grid_12 header-repeat">
-            <div id="branding">
-                <div class="floatleft">
-                    <img src="img/logo.png" alt="Logo" /></div>
-                <div class="clear">
+<body id="Body1" runat="server" style="height: 100%; width: 100%; margin: 0 0 0 0">
+    <form id="form1" runat="server" style="height: 100%">
+        <div class="container_12">
+            <div class="grid_12 header-repeat">
+                <div id="branding">
+                    <div class="floatleft">
+                        <img src="img/logo.png" alt="Logo" />
+                    </div>
+                    <div class="clear">
+                    </div>
                 </div>
+            </div>
+            <div class="clear">
+            </div>
+            <div id="loginTopDiv" style="width: 200px; margin-left: auto; margin-right: auto;">
+                <input type="text" id="account" class="loginText" placeholder="Account" class="LoginSpan" />
+                <br />
+                <br />
+                <input type="password" id="password" class="loginText" placeholder="Password" />
+                <br />
+                <br />
+                <input type="button" value="登陆" onclick="login()" /><br />
+            </div>
+            <div id="loginBottomDiv" style="background-color: #2E5E79">
             </div>
         </div>
         <div class="clear">
         </div>
-        <div id="loginTopDiv" style="width:200px; margin-left:auto; margin-right:auto;">
-            <input type="text" id="account" class="loginText" placeholder="Account" class="LoginSpan"/> <br /><br />
-            <input type="password" id="password" class="loginText" placeholder="Password" /> <br /><br />
-            <input type="button" value="登陆" onclick="login()"/><br />
+        <div id="site_info">
+            <p>
+                Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
+            </p>
         </div>
-         <div id="loginBottomDiv" style="background-color:#2E5E79">
-        </div>
-    </div>
-    <div class="clear">
-    </div>
-    <div id="site_info">
-        <p>
-            Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
-        </p>
-    </div>
     </form>
 </body>
 </html>

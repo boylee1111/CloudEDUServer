@@ -72,8 +72,8 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="container_12">
-        <!--#include file="Navigation.aspx" -->    
-      
+        <!--#include file="Navigation.aspx" -->
+
         <div class="clear">
         </div>
     </div>

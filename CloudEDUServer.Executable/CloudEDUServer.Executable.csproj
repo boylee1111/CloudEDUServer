@@ -749,7 +749,10 @@
     <Content Include="adminconsole\UserNote.aspx" />
     <Content Include="adminconsole\ViewPermissionManagers.aspx" />
     <Content Include="adminconsole\ViewTypeManagers.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="adminconsole\addcourse.aspx.cs">
@@ -875,6 +878,13 @@
       <DependentUpon>ViewTypeManagers.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -920,7 +930,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>5606</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:3518/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

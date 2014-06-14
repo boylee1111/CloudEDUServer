@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
@@ -75,7 +75,7 @@
             <%Session["editType"] = null;%>
         });
 
-        
+
         var isUpdate = false;
         function editCourse(id) {
             if (isUpdate) {
@@ -88,18 +88,18 @@
             var intro = document.getElementById("intro").value;
             var price = document.getElementById("price").value;
             var category = document.getElementById("category").value;
-                    jQuery.post("EditCourse.aspx", {id:id, title: title, intro: intro, price: price, category: category }, function (data) {
-                        if (data == "success") {
-                            isUpdate = false;
-                            alert("课程编辑成功");
-                            window.location.href = "Default.aspx";
-                            return;
-                        }
-                        else {
-                            alert(data);
-                            isUpdate = false;
-                        }
-                    });
+            jQuery.post("EditCourse.aspx", { id: id, title: title, intro: intro, price: price, category: category }, function (data) {
+                if (data == "success") {
+                    isUpdate = false;
+                    alert("课程编辑成功");
+                    window.location.href = "Default.aspx";
+                    return;
+                }
+                else {
+                    alert(data);
+                    isUpdate = false;
+                }
+            });
         }
 
         function checkStr(str) {
@@ -129,7 +129,7 @@
                 return;
             }
             isPost = true;
-            jQuery.post("EditCourse.aspx", { operate: "new",id:courseId, title: document.getElementById("NewCategoryTitle").value }, function (data) {
+            jQuery.post("EditCourse.aspx", { operate: "new", id: courseId, title: document.getElementById("NewCategoryTitle").value }, function (data) {
                 if (data == "success") {
                     document.getElementById("NewCategoryTitle").value = "";
                     alert("新建成功");
@@ -142,10 +142,10 @@
             })
         }
 
-   </script>
+    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
-   <div class="container_12">
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
         <%
             if (!ManagerAccess.haveCourseEditPermission((MANAGER)Session["manager"]))
@@ -155,24 +155,24 @@
             }
         %>
 
-       <%
+        <%
            
-           if (Session["editCourse"] == null)
-           {
-               Response.Redirect("Default.aspx"); 
-           } 
-           COURSE course=(COURSE) Session["editCourse"];
-           Session["editCourse"] = null;
-       %>
+            if (Session["editCourse"] == null)
+            {
+                Response.Redirect("Default.aspx");
+            }
+            COURSE course = (COURSE)Session["editCourse"];
+            Session["editCourse"] = null;
+        %>
         <div class="grid_10">
             <div class="box round first fullpage">
-                <h2> Edit Course</h2>
+                <h2>Edit Course</h2>
 
                 <br />
-                 <button onclick="showNewCategory()" style="float:right" id="showNewCategoryButton">Add Category</button>
-                <br/>
+                <button onclick="showNewCategory()" style="float: right" id="showNewCategoryButton">Add Category</button>
                 <br />
-                <table id="NewCategory" style="float:right; display:none; z-index:100;">
+                <br />
+                <table id="NewCategory" style="float: right; display: none; z-index: 100;">
                     <tr>
                         <td class="col1">
                             <label>Title</label>
@@ -182,77 +182,76 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
-                        </td>
-                        <td style="text-align:right">
+                        <td></td>
+                        <td style="text-align: right">
                             <button onclick="submitNewCategory(<%=course.ID %>)">确认</button>
                         </td>
                     </tr>
                 </table>
                 <div class="block ">
                     <form>
-                    <table class="form">
-                        <tr>
-                            <td>
-                                <label>Title</label>
-                            </td>
-                            <td>
-                                <input type="text" value="<%=course.TITLE %>" class="success" id="title"/>      
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Description</label>
-                             </td>
-                            <td>
-                                <textarea style="width:300px; height:100px;" id="intro">
+                        <table class="form">
+                            <tr>
+                                <td>
+                                    <label>Title</label>
+                                </td>
+                                <td>
+                                    <input type="text" value="<%=course.TITLE %>" class="success" id="title" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Description</label>
+                                </td>
+                                <td>
+                                    <textarea style="width: 300px; height: 100px;" id="intro">
                                     <%=course.INTRO %>
                                 </textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Price</label>
-                            </td>
-                            <td>
-                                <input type="text" value="<%=course.PRICE.ToString().Substring(0,course.PRICE.ToString().Length-2) %>"  id="price" />
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Price</label>
+                                </td>
+                                <td>
+                                    <input type="text" value="<%=course.PRICE.ToString().Substring(0,course.PRICE.ToString().Length-2) %>" id="price" />
+                                </td>
+                            </tr>
 
 
-                        <tr>
-                            <td>
-                                 <label>category</label>
-                            </td>
-                            <td>
-                                <select id="category" name="select">
-                                    <%
-                                       CATEGORY []category=CourseAccess.GetAllCategories();
-                                       for (int i=0; i<category.Length; i++)
-                                       { 
-                                    %>
+                            <tr>
+                                <td>
+                                    <label>category</label>
+                                </td>
+                                <td>
+                                    <select id="category" name="select">
+                                        <%
+                                            CATEGORY[] category = CourseAccess.GetAllCategories();
+                                            for (int i = 0; i < category.Length; i++)
+                                            { 
+                                        %>
                                         <option value="<%=i %>"><%=category[i].CATE_NAME %></option>
-                                    <%}%>
-                                </select>
-                                <script>
+                                        <%}%>
+                                    </select>
+                                    <script>
                                     <%
-                                    int cateId=0;
-                                    for (int i = 0; i < category.Length; i++)
-                                    {
-                                        if (category[i].ID == (int)course.CATEGORY)
+                                        int cateId = 0;
+                                        for (int i = 0; i < category.Length; i++)
                                         {
-                                            cateId = i;
-                                            break;
+                                            if (category[i].ID == (int)course.CATEGORY)
+                                            {
+                                                cateId = i;
+                                                break;
+                                            }
                                         }
-                                    }
                                     %>
-                                    document.getElementById('category').value='<%=cateId%>';
-                                </script>
-                            </td>
-                        </tr>                            
-                    </table>  
+                                        document.getElementById('category').value = '<%=cateId%>';
+                                    </script>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
-                    <button onclick="editCourse(<%=course.ID %>)" style="margin-left:250px;">确认</button>
+                    <button onclick="editCourse(<%=course.ID %>)" style="margin-left: 250px;">确认</button>
                 </div>
             </div>
         </div>

@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -80,10 +80,10 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-       <%
-            if (!ManagerAccess.haveTransactionPermission ((MANAGER)Session["manager"]))
+        <%
+            if (!ManagerAccess.haveTransactionPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
                 Response.End();
@@ -93,51 +93,51 @@
             <div class="box round first grid">
                 <h2>Transaction List
                 </h2>
-                     <div style="float:right">
-                        From<input type="date" id="from"/>
-                        To<input type="date" id="to" /><br />
-                        <button onclick="searchDay()">搜索</button>
-                    </div>
+                <div style="float: right">
+                    From<input type="date" id="from" />
+                    To<input type="date" id="to" /><br />
+                    <button onclick="searchDay()">搜索</button>
+                </div>
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th style="text-align:center">Id</th>
-							<th style="text-align:center">Buyer</th>
-							<th style="text-align:center">Saler</th>
-                            <th style="text-align:center">Course</th>
-                            <th style="text-align:center">Price</th>
-                            <th style="text-align:center">Time</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            SALEORDER[] saleorder=null;
-                            try
-                            {
-                                DateTime from = DateTime.Parse(Request.Params.Get("from"));
-                                DateTime to = DateTime.Parse(Request.Params.Get("to"));
-                                saleorder= TransactionAccess.GetOrderByDateBetween(from, to);
-                            }
-                            catch
-                            {
-                                saleorder = TransactionAccess.GetAllSaleOrder();
-                            }
-                            for (int i=0; i<saleorder.Length; i++)
-                            {
-                         %>
-						    <tr>
-							    <td style="text-align:center"><%=saleorder[i].ID %></td>
-							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID(saleorder[i].BUYER).NAME %></td>
-							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID(saleorder[i].SALER).NAME %></td>	
-                                <td style="text-align:center"><%=CourseAccess.GetCourseById(saleorder[i].COURSE).TITLE %></td>	
-                                <td style="text-align:center"><%=CourseAccess.GetCourseById(saleorder[i].COURSE).PRICE %></td>					    
-							    <td style="text-align:center"><%=saleorder[i].TIME %></td>
-						    </tr>	
-                        <% }%>
-					</tbody>
-				    </table>                               
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Id</th>
+                                <th style="text-align: center">Buyer</th>
+                                <th style="text-align: center">Saler</th>
+                                <th style="text-align: center">Course</th>
+                                <th style="text-align: center">Price</th>
+                                <th style="text-align: center">Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                SALEORDER[] saleorder = null;
+                                try
+                                {
+                                    DateTime from = DateTime.Parse(Request.Params.Get("from"));
+                                    DateTime to = DateTime.Parse(Request.Params.Get("to"));
+                                    saleorder = TransactionAccess.GetOrderByDateBetween(from, to);
+                                }
+                                catch
+                                {
+                                    saleorder = TransactionAccess.GetAllSaleOrder();
+                                }
+                                for (int i = 0; i < saleorder.Length; i++)
+                                {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=saleorder[i].ID %></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID(saleorder[i].BUYER).NAME %></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID(saleorder[i].SALER).NAME %></td>
+                                <td style="text-align: center"><%=CourseAccess.GetCourseById(saleorder[i].COURSE).TITLE %></td>
+                                <td style="text-align: center"><%=CourseAccess.GetCourseById(saleorder[i].COURSE).PRICE %></td>
+                                <td style="text-align: center"><%=saleorder[i].TIME %></td>
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

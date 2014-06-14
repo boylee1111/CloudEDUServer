@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShowRecommendationCourse.aspx.cs" Inherits="CloudEDUServer.adminconsole.ShowRecommendationCourse" %>
+
 <%@ Import Namespace="CloudEDUServer" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -77,7 +78,7 @@
         });
 
 
-        function changeState(id,recId){
+        function changeState(id, recId) {
             if (document.getElementById('course' + id).checked == true) {
                 jQuery.post("ShowRecommendationCourse.aspx", { operate: "yes", id: id, recId: recId });
             }
@@ -91,62 +92,63 @@
 
 <body>
     <form id="form1" runat="server">
-    <div>
-        <table class="data display datatable">
-            <thead>
-				<tr>
-	                <th style="text-align:center">Title</th>
-				    <th style="text-align:center">Price</th>							
-                    <th style="text-align:center">Check</th>
-				</tr>
-			</thead>
-        <%
-            try
-            {
-                if (Session["recommendationId"] == null) throw new Exception();
-                RECOMMENDATION recommendation = CourseAccess.GetRecommendationByID(int.Parse((string)Session["recommendationId"]));
-                Session["recommendationId"] = null;
-                COURSE[] recommendationCourse = CourseAccess.GetCoursesByRecommendation(recommendation);
-                COURSE[] allCourse = CourseAccess.GetAllCourses();
-                
-                for (int i = 0; i < allCourse.Length; i++)
-                {
-                    if (allCourse[i].COURSE_STATUS.ToLower().Trim().Equals("ok"))
+        <div>
+            <table class="data display datatable">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">Title</th>
+                        <th style="text-align: center">Price</th>
+                        <th style="text-align: center">Check</th>
+                    </tr>
+                </thead>
+                <%
+                    try
                     {
-            %>      <tr>
-                        <td style="text-align:center"><%=allCourse[i].TITLE %></td>
-                        <td style="text-align:center"><%=allCourse[i].PRICE %></td>
-                        <td style="text-align:center">
-                        <input type="checkbox" id="course<%=allCourse[i].ID%>" onchange="changeState('<%=allCourse[i].ID%>','<%=recommendation.ID %>')" />          
-                        </td>
-                    </tr>       
-                    <script>
-                        document.getElementById('course<%=allCourse[i].ID%>').checked=false;
-                    </script>
-            <%
-                        for (int j = 0; j < recommendationCourse.Length; j++)
+                        if (Session["recommendationId"] == null) throw new Exception();
+                        RECOMMENDATION recommendation = CourseAccess.GetRecommendationByID(int.Parse((string)Session["recommendationId"]));
+                        Session["recommendationId"] = null;
+                        COURSE[] recommendationCourse = CourseAccess.GetCoursesByRecommendation(recommendation);
+                        COURSE[] allCourse = CourseAccess.GetAllCourses();
+
+                        for (int i = 0; i < allCourse.Length; i++)
                         {
-                            if (allCourse[i].ID == recommendationCourse[j].ID)
+                            if (allCourse[i].COURSE_STATUS.ToLower().Trim().Equals("ok"))
                             {
-                                %>
-                                    <script>
-                                        document.getElementById('course<%=allCourse[i].ID%>').checked = true;
-                                    </script>
-                    
-                                <%
-                                break;
+                %>
+                <tr>
+                    <td style="text-align: center"><%=allCourse[i].TITLE %></td>
+                    <td style="text-align: center"><%=allCourse[i].PRICE %></td>
+                    <td style="text-align: center">
+                        <input type="checkbox" id="course<%=allCourse[i].ID%>" onchange="changeState('<%=allCourse[i].ID%>','<%=recommendation.ID %>')" />
+                    </td>
+                </tr>
+                <script>
+                    document.getElementById('course<%=allCourse[i].ID%>').checked = false;
+                </script>
+                <%
+                                for (int j = 0; j < recommendationCourse.Length; j++)
+                                {
+                                    if (allCourse[i].ID == recommendationCourse[j].ID)
+                                    {
+                %>
+                <script>
+                    document.getElementById('course<%=allCourse[i].ID%>').checked = true;
+                </script>
+
+                <%
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
-            catch
-            {
-                Response.Redirect("Default.aspx");
-            }
-        %>
-        </table>
-    </div>
+                    catch
+                    {
+                        Response.Redirect("Default.aspx");
+                    }
+                %>
+            </table>
+        </div>
     </form>
 </body>
 </html>

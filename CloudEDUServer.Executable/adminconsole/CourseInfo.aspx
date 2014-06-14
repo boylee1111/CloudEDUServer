@@ -6,7 +6,7 @@
 <head id="Head1" runat="server">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
-    
+
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
@@ -78,7 +78,7 @@
         });
 
         function showResource(lessonId) {
-            window.location.href = "Resource.aspx?lessonId="+lessonId;
+            window.location.href = "Resource.aspx?lessonId=" + lessonId;
         }
 
         function showDocument(lessonId) {
@@ -88,13 +88,13 @@
         function showNote(lessonId) {
             window.location.href = "UserNote.aspx?lessonId=" + lessonId;
         }
-     </script>
+    </script>
 
 </head>
 <body>
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-       <%
+        <%
             if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
@@ -103,12 +103,11 @@
         %>
         <div class="grid_10">
             <div class="box round first">
-                <h2>
-                    Course Information</h2>
+                <h2>Course Information</h2>
                 <div class="block">
                     <!-- paragraphs -->
                     <%
-                        COURSE course=null;
+                        COURSE course = null;
                         try
                         {
                             course = CourseAccess.GetCourseById(int.Parse(Request.Params.Get("courseId")));
@@ -124,36 +123,37 @@
                         }
                     %>
                     <p class="start">
-                        <img src="img/vertical.jpg" alt="Ginger" class="right" style="margin-left:auto; margin-right:auto" /><%=course.INTRO %></p>
+                        <img src="img/vertical.jpg" alt="Ginger" class="right" style="margin-left: auto; margin-right: auto" /><%=course.INTRO %>
+                    </p>
 
                     <table class="data display datatable">
-					<thead>
-						<tr>
-                            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Number</th>
-							<th style="text-align:center">Content</th>						
-                            <th style="text-align:center">Resource</th>
-                            <th style="text-align:center">Document</th>
-                            <th style="text-align:center">Note</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            LESSON[] lesson = CourseAccess.GetLessonsByCourse(course);
-                            for (int i=0; i<lesson.Length; i++)
-                            {
-                        %>
-						    <tr>
-                                <td style="text-align:center"><%=lesson[i].TITLE %></td>
-							    <td style="text-align:center"><%=lesson[i].NUMBER %></td>
-							    <td style="text-align:center"><%=lesson[i].CONTENT %></td>			    	
-                                <td style="text-align:center"><a href="javascript:showResource('<%=lesson[i].ID %>')">资源</a></td>
-                                <td style="text-align:center"><a href="javascript:showDocument('<%=lesson[i].ID %>')">文档</a></td>
-                                <td style="text-align:center"><a href="javascript:showNote('<%=lesson[i].ID %>')">笔记</a></td>
-						    </tr>	
-                        <%  } %>
-					</tbody>
-				    </table>                        
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Number</th>
+                                <th style="text-align: center">Content</th>
+                                <th style="text-align: center">Resource</th>
+                                <th style="text-align: center">Document</th>
+                                <th style="text-align: center">Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                LESSON[] lesson = CourseAccess.GetLessonsByCourse(course);
+                                for (int i = 0; i < lesson.Length; i++)
+                                {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=lesson[i].TITLE %></td>
+                                <td style="text-align: center"><%=lesson[i].NUMBER %></td>
+                                <td style="text-align: center"><%=lesson[i].CONTENT %></td>
+                                <td style="text-align: center"><a href="javascript:showResource('<%=lesson[i].ID %>')">资源</a></td>
+                                <td style="text-align: center"><a href="javascript:showDocument('<%=lesson[i].ID %>')">文档</a></td>
+                                <td style="text-align: center"><a href="javascript:showNote('<%=lesson[i].ID %>')">笔记</a></td>
+                            </tr>
+                            <%  } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -167,6 +167,6 @@
             Copyright <a href="#">Cloud Edu</a>. All Rights Reserved.
         </p>
     </div>
-    
+
 </body>
 </html>

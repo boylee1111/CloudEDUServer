@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -89,82 +89,82 @@
         }
 
         function showUserNote(userId) {
-            window.location.href = "UserNote.aspx?userId="+userId;
+            window.location.href = "UserNote.aspx?userId=" + userId;
         }
 
     </script>
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>User List</h2>
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th style="text-align:center">Name</th>
-							<th style="text-align:center">Balance</th>
-							<th style="text-align:center">Email</th>
-                            <th style="text-align:center">Degree</th>
-                            <th style="text-align:center">Learn Rate</th>
-                            <th style="text-align:center">Teach Rate</th>
-                            <th style="text-align:center">Birthday</th>
-                            <th style="text-align:center">Comment</th>
-                             <th style="text-align:center">note</th>
-                            <th style="text-align:center">Allow</th>                          
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            CUSTOMER[] user=CustomerAccess.GetAllCustomers();
-                            for (int i=0; i<user.Length; i++)
-                            {
-                                if (ManagerAccess.haveUserPermission((MANAGER)Session["manager"]))
-                                { 
-                         %>
-                            
-						    <tr ondblclick="editUser(<%=user[i].ID %>)">
-                               <%}
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Name</th>
+                                <th style="text-align: center">Balance</th>
+                                <th style="text-align: center">Email</th>
+                                <th style="text-align: center">Degree</th>
+                                <th style="text-align: center">Learn Rate</th>
+                                <th style="text-align: center">Teach Rate</th>
+                                <th style="text-align: center">Birthday</th>
+                                <th style="text-align: center">Comment</th>
+                                <th style="text-align: center">note</th>
+                                <th style="text-align: center">Allow</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                CUSTOMER[] user = CustomerAccess.GetAllCustomers();
+                                for (int i = 0; i < user.Length; i++)
+                                {
+                                    if (ManagerAccess.haveUserPermission((MANAGER)Session["manager"]))
+                                    { 
+                            %>
+
+                            <tr ondblclick="editUser(<%=user[i].ID %>)">
+                                <%}
                                     else
                                     {%>
                                 <tr>
-                                 <%} %>
-							    <td style="text-align:center"><%=user[i].NAME %></td>
-							    <td style="text-align:center"><%=user[i].BALANCE.ToString().Substring(0,user[i].BALANCE.ToString().Length-2) %></td>
-							    <td style="text-align:center"><%=user[i].EMAIL %></td>	
-                                <td style="text-align:center; text-transform:capitalize"><%=user[i].DEGREE %></td>						    
-							    <td style="text-align:center"><%=user[i].LEARN_RATE %></td>
-                                <td style="text-align:center"><%=user[i].TEACH_RATE %></td>
-                                <td style="text-align:center"><%=user[i].BIRTHDAY.ToShortDateString() %></td>
-                                <td style="text-align:center"><a href="javascript:showUserComment('<%=user[i].ID %>')">评论</a></td>
-                                 <td style="text-align:center"><a href="javascript:showUserNote('<%=user[i].ID %>')">笔记</a></td>
-                                <td style="text-align:center">
-                                     <%
-                                        if (user[i].ALLOW)
-                                        {
-                                    %>
-                                            <input type="radio" name="<%=user[i].ID %>" checked="checked" value="YES" onchange="changeUserState(this)" />YES
+                                    <%} %>
+                                    <td style="text-align: center"><%=user[i].NAME %></td>
+                                    <td style="text-align: center"><%=user[i].BALANCE.ToString().Substring(0,user[i].BALANCE.ToString().Length-2) %></td>
+                                    <td style="text-align: center"><%=user[i].EMAIL %></td>
+                                    <td style="text-align: center; text-transform: capitalize"><%=user[i].DEGREE %></td>
+                                    <td style="text-align: center"><%=user[i].LEARN_RATE %></td>
+                                    <td style="text-align: center"><%=user[i].TEACH_RATE %></td>
+                                    <td style="text-align: center"><%=user[i].BIRTHDAY.ToShortDateString() %></td>
+                                    <td style="text-align: center"><a href="javascript:showUserComment('<%=user[i].ID %>')">评论</a></td>
+                                    <td style="text-align: center"><a href="javascript:showUserNote('<%=user[i].ID %>')">笔记</a></td>
+                                    <td style="text-align: center">
+                                        <%
+                                    if (user[i].ALLOW)
+                                    {
+                                        %>
+                                        <input type="radio" name="<%=user[i].ID %>" checked="checked" value="YES" onchange="changeUserState(this)" />YES
                                             <input type="radio" name="<%=user[i].ID %>" value="NO" onchange="changeUserState(this)" />NO
                                   
                                     <%         
-                                        }
-                                        else
-                                        {
+                                    }
+                                    else
+                                    {
                                     %>
-                                            <input type="radio" name="<%=user[i].ID %>" value="YES" onchange="changeUserState(this)" />YES
+                                        <input type="radio" name="<%=user[i].ID %>" value="YES" onchange="changeUserState(this)" />YES
                                             <input type="radio" name="<%=user[i].ID %>" value="NO" checked="checked" onchange="changeUserState(this)" />NO
                                     <%  }   %>
-                                </td>
-                               
-						    </tr>	
-                        <%  } %>	
-					</tbody>
-				    </table>                               
+                                    </td>
+
+                                </tr>
+                                <%  } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
@@ -71,7 +71,7 @@
         $(document).ready(function () {
             setupLeftMenu();
             setSidebarHeight();
-            document.getElementById("type").value="<%=Session["editType"]%>" ;
+            document.getElementById("type").value = "<%=Session["editType"]%>";
             <%Session["editType"] = null;%>
         });
 
@@ -111,11 +111,11 @@
                     isUpdate = false;
                     return;
                 }
-                else{
+                else {
 
                     var permission = 0;
                     for (var i = 0; i < permissionLength; i++) {
-                        
+
                         if (document.getElementById('permissionID' + i).checked) {
                             permission += 1 << i;
                         }
@@ -123,7 +123,7 @@
                     if (isNewPassword) {
                         password = hex_md5(password);
                     }
-                    jQuery.post("EditManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
+                    jQuery.post("EditManager.aspx", { account: account, password: password, permission: permission, type: type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("管理员编辑成功");
@@ -166,13 +166,13 @@
                 }
             }
         }
-   </script>
+    </script>
 </head>
 <body id="Body1" class="Body1" runat="server">
-   <div class="container_12">
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
-       <%
+        <%
             if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
@@ -182,82 +182,81 @@
 
         <div class="grid_10">
             <div class="box round first fullpage">
-                <h2>
-                    Edit Manager</h2>
+                <h2>Edit Manager</h2>
                 <div class="block ">
                     <form>
-                    <table class="form">
-                        <tr>
-                            <td>
-                                <label>账号</label>
-                            </td>
-                            <td>
-                                <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account"/>
-                                <% Session["editAccount"] = null; %>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>密码</label>
-                            </td>
-                            <td>
-                                <input type="password" maxlength="10"  id="password" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>确认密码</label>
-                            </td>
-                            <td>
-                                <input type="password"  maxlength="10" id="confirmPassword" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <label>type</label>
-                            </td>
-                            <td>
-                                <select id="type" name="select">
-                                    <%
-                                       TYPE []allType=ManagerAccess.GetAllManagerTypes();
-                                       for (int i=0; i<allType.Length; i++)
-                                       { 
-                                    %>
+                        <table class="form">
+                            <tr>
+                                <td>
+                                    <label>账号</label>
+                                </td>
+                                <td>
+                                    <input type="text" readonly value="<%=Session["editAccount"] %>" maxlength="10" class="success" id="account" />
+                                    <% Session["editAccount"] = null; %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>密码</label>
+                                </td>
+                                <td>
+                                    <input type="password" maxlength="10" id="password" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>确认密码</label>
+                                </td>
+                                <td>
+                                    <input type="password" maxlength="10" id="confirmPassword" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>type</label>
+                                </td>
+                                <td>
+                                    <select id="type" name="select">
+                                        <%
+                                            TYPE[] allType = ManagerAccess.GetAllManagerTypes();
+                                            for (int i = 0; i < allType.Length; i++)
+                                            { 
+                                        %>
                                         <option value="<%=allType[i].ID %>"><%=allType[i].DESCRIPTION %></option>
-                                    <%}%>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>权限</label>
-                            </td>
-                            <td>
-                               <%
-                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
-                                PERMISSION[] managerPermision =(PERMISSION[]) Session["editPermission"];
-                                int editPermisionJ=0;
-                                for (int i=0; i<permission.Length; i++)
-                                {
-                                    if (managerPermision!=null && editPermisionJ<managerPermision.Length && managerPermision[editPermisionJ].ID == permission[i].ID)
-                                    {
-                                        editPermisionJ++;                                
-                                %>
-                                      <input type="checkbox" id="<%="permissionID"+i%>" onchange="changePermission(this)" checked="checked" /><%=permission[i].NAME %>
-                                    
-                                <% } 
-                                   else
-                                   {%>
-                                      <input type="checkbox" id="<%="permissionID"+i%>"  onchange="changePermission(this)" /><%=permission[i].NAME %>
-                                   <%}
-                                }
-                                Session["editPermission"]=null;
-                                %>  
-                            </td>
-                        </tr>
-                    </table>  
+                                        <%}%>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>权限</label>
+                                </td>
+                                <td>
+                                    <%
+                                        PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                        PERMISSION[] managerPermision = (PERMISSION[])Session["editPermission"];
+                                        int editPermisionJ = 0;
+                                        for (int i = 0; i < permission.Length; i++)
+                                        {
+                                            if (managerPermision != null && editPermisionJ < managerPermision.Length && managerPermision[editPermisionJ].ID == permission[i].ID)
+                                            {
+                                                editPermisionJ++;                                
+                                    %>
+                                    <input type="checkbox" id="<%="permissionID"+i%>" onchange="changePermission(this)" checked="checked" /><%=permission[i].NAME %>
+
+                                    <% }
+                                            else
+                                            {%>
+                                    <input type="checkbox" id="<%="permissionID"+i%>" onchange="changePermission(this)" /><%=permission[i].NAME %>
+                                    <%}
+                                        }
+                                        Session["editPermission"] = null;
+                                    %>  
+                                </td>
+                            </tr>
+                        </table>
                     </form>
-                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left: 250px;">确认</button>
                 </div>
             </div>
         </div>

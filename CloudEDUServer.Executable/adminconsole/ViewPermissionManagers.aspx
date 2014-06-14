@@ -107,7 +107,7 @@
                 return;
             }
             isOperating = true;
-    
+
             $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
                 if (data == "success") {
                     window.location.href = "EditManager.aspx";

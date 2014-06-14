@@ -77,7 +77,7 @@
             setSidebarHeight();
         });
 
-      
+
     </script>
 </head>
 <body id="Body1" runat="server">
@@ -100,7 +100,7 @@
             catch
             {
             }
-            if (user == null && lesson==null)
+            if (user == null && lesson == null)
             {
                 Response.Redirect("Default.aspx");
                 Response.End();
@@ -123,16 +123,16 @@
                         </thead>
                         <tbody>
                             <%
-                                NOTE_SHARABLE[] note=null;
+                                NOTE_SHARABLE[] note = null;
                                 if (user != null)
                                 {
-                                    note = CourseAccess.GetNoteSharableByCustomer(user); 
+                                    note = CourseAccess.GetNoteSharableByCustomer(user);
                                 }
                                 else if (lesson != null)
                                 {
                                     note = CourseAccess.GetNoteSharableByLesson(lesson);
                                 }
-                                 
+
                                 for (int i = 0; i < note.Length; i++)
                                 {
                              
@@ -140,7 +140,7 @@
                             <tr>
                                 <td style="text-align: center"><%=note[i].TITLE%></td>
                                 <td style="text-align: center"><%=CourseAccess.GetLessonByID( note[i].LESSON_ID).TITLE%></td>
-                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID((int)note[i].CUSTOMER_ID).NAME%></td>        
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID((int)note[i].CUSTOMER_ID).NAME%></td>
                                 <td style="text-align: center"><%=note[i].CONTENT %></td>
                                 <td style="text-align: center"><%=note[i].DATE %></td>
                             </tr>

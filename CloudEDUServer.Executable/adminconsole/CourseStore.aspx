@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -80,7 +80,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
         <%
             if (!ManagerAccess.haveCourseStorePermission((MANAGER)Session["manager"]))
@@ -93,17 +93,17 @@
             <div class="box round first grid">
                 <h2>Course Store</h2>
                 <div class="block">
-                    <div style="margin-left:auto; margin-right:auto">
+                    <div style="margin-left: auto; margin-right: auto">
                         <span>
-                             <button style="margin-left:300px; width:155px; height:136px; background-image:url(img/a.jpg)" onclick="recommandCourse()"></button>
-                             <p style="margin-left:350px"> 精品课程</p>  
-                        </span> 
-                          
+                            <button style="margin-left: 300px; width: 155px; height: 136px; background-image: url(img/a.jpg)" onclick="recommandCourse()"></button>
+                            <p style="margin-left: 350px">精品课程</p>
+                        </span>
+
                         <span>
-                            <button style="margin-left:300px; width:155px; height:136px;  background-image:url(img/b.jpg)"></button> 
-                             <p style="margin-left:350px">热门课程</p>   
-                         </span>
-                    </div>              
+                            <button style="margin-left: 300px; width: 155px; height: 136px; background-image: url(img/b.jpg)"></button>
+                            <p style="margin-left: 350px">热门课程</p>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

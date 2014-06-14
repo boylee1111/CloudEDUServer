@@ -1,12 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CourseCensorship.aspx.cs" Inherits="CloudEDUServer.adminconsole.CourseCensorship" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -90,7 +91,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
         <%
             if (!ManagerAccess.haveCourseCencorPermission((MANAGER)Session["manager"]))
@@ -102,14 +103,14 @@
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>
-                     <select id="CourseListSelect" onchange="courseListSelect()">
+                    <select id="CourseListSelect" onchange="courseListSelect()">
                         <option value="all">All Course</option>
                         <option value="pending">Pending Course</option>
                         <option value="ok">OK Course </option>
                         <option value="cancel">Cancel Course</option>
                     </select>
                     <%
-                        if (Session["CourseListSelect"]==null)
+                        if (Session["CourseListSelect"] == null)
                         {
                             Session["CourseListSelect"] = "all";
                         }; 
@@ -119,74 +120,74 @@
                     </script>
                 </h2>
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-                            <th style="text-align:center">Course Title</th>
-							<th style="text-align:center">Course Time</th>
-							<th style="text-align:center">Teacher</th>
-							<th style="text-align:center">State</th>                        
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                             COURSE[] course =null;
-                    
-                            if (Session["CourseListSelect"].Equals("pending"))
-                            {
-                                course = CourseAccess.GetAllPendingCourses();
-                            }
-                            else if (Session["CourseListSelect"].Equals("cancel"))
-                            {
-                                course = CourseAccess.GetAllCancelCourses();
-                            }
-                            else if (Session["CourseListSelect"].Equals("ok"))
-                            {
-                                course = CourseAccess.GetAllOKCourses();
-                            }
-                            else
-                            {
-                                course = CourseAccess.GetAllCourses();
-                            }
-                                          
-                            for (int i=0; i<course.Length; i++)
-                            {
-                        %>
-						    <tr  ondblclick="showCourseInfo(<%=course[i].ID %>)">
-                                <td style="text-align:center"><%=course[i].TITLE %></td>
-							    <td style="text-align:center"><%=course[i].START_TIME %></td>
-							    <td style="text-align:center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>
-							    <td style="text-align:center">
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Course Title</th>
+                                <th style="text-align: center">Course Time</th>
+                                <th style="text-align: center">Teacher</th>
+                                <th style="text-align: center">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                COURSE[] course = null;
+
+                                if (Session["CourseListSelect"].Equals("pending"))
+                                {
+                                    course = CourseAccess.GetAllPendingCourses();
+                                }
+                                else if (Session["CourseListSelect"].Equals("cancel"))
+                                {
+                                    course = CourseAccess.GetAllCancelCourses();
+                                }
+                                else if (Session["CourseListSelect"].Equals("ok"))
+                                {
+                                    course = CourseAccess.GetAllOKCourses();
+                                }
+                                else
+                                {
+                                    course = CourseAccess.GetAllCourses();
+                                }
+
+                                for (int i = 0; i < course.Length; i++)
+                                {
+                            %>
+                            <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
+                                <td style="text-align: center"><%=course[i].TITLE %></td>
+                                <td style="text-align: center"><%=course[i].START_TIME %></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>
+                                <td style="text-align: center">
                                     <%
-                                        if (course[i].COURSE_STATUS.Substring(0,2).Equals("OK"))
-                                        {
+                                    if (course[i].COURSE_STATUS.Substring(0, 2).Equals("OK"))
+                                    {
                                     %>
-                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="OK" onchange="changeCourseState(this)" />OK
+                                    <input type="radio" name="<%=course[i].ID %>" checked="checked" value="OK" onchange="changeCourseState(this)" />OK
                                             <input type="radio" name="<%=course[i].ID %>" value="Cancel" onchange="changeCourseState(this)" />Cancel
-                                            <input type="radio" name="<%=course[i].ID %>" value="Pending"  onchange="changeCourseState(this)" />Pending
+                                            <input type="radio" name="<%=course[i].ID %>" value="Pending" onchange="changeCourseState(this)" />Pending
                                   
                                     <%         
-                                        }
-                                        else if (course[i].COURSE_STATUS.Substring(0,6).Equals("CANCEL"))
-                                        {
+                                    }
+                                    else if (course[i].COURSE_STATUS.Substring(0, 6).Equals("CANCEL"))
+                                    {
                                     %>
-                                            <input type="radio" name="<%=course[i].ID %>" value="OK"  onchange="changeCourseState(this)" />OK
-                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Cancel"  onchange="changeCourseState(this)"  />Cancel
-                                            <input type="radio" name="<%=course[i].ID %>" value="Pending"  onchange="changeCourseState(this)" />Pending
-                                    <%  }   
-                                        else
-                                        {
-                                    %>      
-                                            <input type="radio" name="<%=course[i].ID %>" value="OK"  onchange="changeCourseState(this)"/>OK
+                                    <input type="radio" name="<%=course[i].ID %>" value="OK" onchange="changeCourseState(this)" />OK
+                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Cancel" onchange="changeCourseState(this)" />Cancel
+                                            <input type="radio" name="<%=course[i].ID %>" value="Pending" onchange="changeCourseState(this)" />Pending
+                                    <%  }
+                                    else
+                                    {
+                                    %>
+                                    <input type="radio" name="<%=course[i].ID %>" value="OK" onchange="changeCourseState(this)" />OK
                                             <input type="radio" name="<%=course[i].ID %>" value="Cancel" onchange="changeCourseState(this)" />Cancel
-                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Pending" onchange="changeCourseState(this)"  />Pending
+                                            <input type="radio" name="<%=course[i].ID %>" checked="checked" value="Pending" onchange="changeCourseState(this)" />Pending
                                     <%  } %>
-                                </td>         					    
-						    </tr>	
-                        <%  } %>	
-					</tbody>
-				    </table>                               
+                                </td>
+                            </tr>
+                            <%  } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

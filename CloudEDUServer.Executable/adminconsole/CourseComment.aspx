@@ -76,8 +76,7 @@
         function deleteComment(id) {
             if (confirm("确认删除该评论吗")) {
                 jQuery.post("CourseComment.aspx", { operate: "delete", id: id }, function (data) {
-                    if (data=="success")
-                    {
+                    if (data == "success") {
                         window.location.href = "CourseComment.aspx";
                     }
                 });
@@ -89,7 +88,7 @@
 <body id="Body1" runat="server">
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-         <%
+        <%
             if (!ManagerAccess.haveCourseCencorPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
@@ -110,64 +109,64 @@
                                 <th style="text-align: center">Content</th>
                                 <%--     <th style="text-align:center">Rate</th>--%>
                                 <th style="text-align: center">Time</th>
-                                <th style="text-align:center">Delete</th>
+                                <th style="text-align: center">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% 
-                            COURSE course = (COURSE)Session["courseComment"];
-                            CUSTOMER user=(CUSTOMER)Session["userComment"];
-                            COMMENT[] comment=null;
-                            
-                            if (course!=null || user!=null)
-                            {
-                                if (course!=null)
+                                COURSE course = (COURSE)Session["courseComment"];
+                                CUSTOMER user = (CUSTOMER)Session["userComment"];
+                                COMMENT[] comment = null;
+
+                                if (course != null || user != null)
                                 {
-                                    comment=CourseAccess.GetCommentsByCourse(course);
-                                    Session["courseComment"]=null;
-                                }
-                                else if (user!=null)
-                                {
-                                    comment=CourseAccess.GetCommentsByCustomer(user);
-                                    Session["userComment"]=null;
-                                }
-                            
-                                ////////////////////show comment
-                                for (int i=0; i<comment.Length; i++)
-                                {
-                                %>
-                                <tr>
-                                    <td style="text-align: center"><%=CourseAccess.GetCourseById(comment[i].COURSE_ID).TITLE %></td>
-                                    <td style="text-align: center"><%=comment[i].TITLE %></td>
-                                    <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( comment[i].CUSTOMER_ID).NAME %></td>
-                                    <td style="text-align: center"><%=comment[i].CONTENT %></td>
-                                    <td style="text-align: center"><%=comment[i].TIME %></td>
-                                    <td style="text-align: center" onclick="deleteComment(<%=comment[i].ID %>)">删除</td>
-                                </tr>
-                                <%
-                                }
-                            }
-                            else
-                            {
-                                COURSE[] allCourse = CourseAccess.GetAllCourses();
-                                for (int j=0; j<allCourse.Length; j++)
-                                {
-                                    COMMENT[] allComment = CourseAccess.GetCommentsByCourse(allCourse[j]);
-                                    for (int i = 0; i < allComment.Length; i++)
+                                    if (course != null)
                                     {
-                                    %>
-                                        <tr>
-                                            <td style="text-align: center"><%=allCourse[j].TITLE %></td>
-                                            <td style="text-align: center"><%=allComment[i].TITLE %></td>
-                                            <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( allComment[i].CUSTOMER_ID).NAME %></td>
-                                            <td style="text-align: center"><%=allComment[i].CONTENT %></td>
-                                            <td style="text-align: center"><%=allComment[i].TIME %></td>
-                                             <td style="text-align: center" onclick="deleteComment(<%=allComment[i].ID %>)">删除</td>
-                                        </tr>
-                                    <%
+                                        comment = CourseAccess.GetCommentsByCourse(course);
+                                        Session["courseComment"] = null;
+                                    }
+                                    else if (user != null)
+                                    {
+                                        comment = CourseAccess.GetCommentsByCustomer(user);
+                                        Session["userComment"] = null;
+                                    }
+
+                                    ////////////////////show comment
+                                    for (int i = 0; i < comment.Length; i++)
+                                    {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=CourseAccess.GetCourseById(comment[i].COURSE_ID).TITLE %></td>
+                                <td style="text-align: center"><%=comment[i].TITLE %></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( comment[i].CUSTOMER_ID).NAME %></td>
+                                <td style="text-align: center"><%=comment[i].CONTENT %></td>
+                                <td style="text-align: center"><%=comment[i].TIME %></td>
+                                <td style="text-align: center" onclick="deleteComment(<%=comment[i].ID %>)">删除</td>
+                            </tr>
+                            <%
                                     }
                                 }
-                            }
+                                else
+                                {
+                                    COURSE[] allCourse = CourseAccess.GetAllCourses();
+                                    for (int j = 0; j < allCourse.Length; j++)
+                                    {
+                                        COMMENT[] allComment = CourseAccess.GetCommentsByCourse(allCourse[j]);
+                                        for (int i = 0; i < allComment.Length; i++)
+                                        {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=allCourse[j].TITLE %></td>
+                                <td style="text-align: center"><%=allComment[i].TITLE %></td>
+                                <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( allComment[i].CUSTOMER_ID).NAME %></td>
+                                <td style="text-align: center"><%=allComment[i].CONTENT %></td>
+                                <td style="text-align: center"><%=allComment[i].TIME %></td>
+                                <td style="text-align: center" onclick="deleteComment(<%=allComment[i].ID %>)">删除</td>
+                            </tr>
+                            <%
+                                        }
+                                    }
+                                }
                             %>
                         </tbody>
 

@@ -76,23 +76,23 @@
         });
 
         var isOperating = false;
-       
+
         function searchManager(length) {
             if (isOperating) {
                 alert("操作中，请稍后");
                 return;
             }
             isOperating = true;
-            length=parseInt(length);
-            var result=0;
+            length = parseInt(length);
+            var result = 0;
             for (var i = 0; i < length; i++) {
                 if (document.getElementById('permissionCheckbox' + i).checked) {
                     document.getElementById('permissionCheckbox' + i).checked = false;
                     result += 1 << i;
                 }
             }
-  
-            $.post("PermissionList.aspx", { operate: "search", result:result }, function (data) {
+
+            $.post("PermissionList.aspx", { operate: "search", result: result }, function (data) {
                 if (data == "success") {
                     window.location.href = "ViewPermissionManagers.aspx";
                 }
@@ -108,7 +108,7 @@
     <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
-       <%
+        <%
             if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
@@ -136,7 +136,8 @@
                             %>
                             <tr>
                                 <td style="text-align: center"><%=permission[i].NAME%></td>
-                                <td style="text-align: center"><input type="checkbox" id="permissionCheckbox<%=i %>"/>Choose</td>
+                                <td style="text-align: center">
+                                    <input type="checkbox" id="permissionCheckbox<%=i %>" />Choose</td>
                             </tr>
                             <%}%>
                         </tbody>

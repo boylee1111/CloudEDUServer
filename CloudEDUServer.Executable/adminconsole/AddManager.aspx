@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -79,7 +79,7 @@
         function addManager(permissionLength) {
             if (isUpdate) {
                 alert("数据跟新中，请稍后");
-                return ;
+                return;
             }
             isUpdate = true;
 
@@ -120,7 +120,7 @@
 
                     password = hex_md5(password);
 
-                    jQuery.post("AddManager.aspx", { account: account, password: password, permission:permission,type:type }, function (data) {
+                    jQuery.post("AddManager.aspx", { account: account, password: password, permission: permission, type: type }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("新的管理员添加成功");
@@ -144,12 +144,12 @@
             }
         }
 
-        function checkStr(str){
+        function checkStr(str) {
             var reg = /[^A-Za-z0-9_]/;
             if (reg.test(str)) return false;
             else return true;
         }
-        
+
         function changePermission(ele) {
             if (ele.id == "permissionID2") {
                 if (ele.checked == true) {
@@ -168,83 +168,82 @@
                 }
             }
         }
-   </script>
+    </script>
 </head>
 
 <body class="Body1" runat="server">
-   <div class="container_12">
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-       <%
-           if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
-           {
+        <%
+            if (!ManagerAccess.haveManagerPermission((MANAGER)Session["manager"]))
+            {
                 Response.Redirect("Default.aspx");
                 Response.End();
-           }
+            }
         %>
         <div class="grid_10">
             <div class="box round first fullpage">
-                <h2>
-                    Add Manager</h2>
+                <h2>Add Manager</h2>
                 <div class="block ">
                     <form>
-                    <table class="form">
-                        <tr>
-                            <td>
-                                <label>account</label>
-                            </td>
-                            <td>
-                                <input type="text"  maxlength="10" class="success" id="account"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>password</label>
-                            </td>
-                            <td>
-                                <input type="password" maxlength="10"  id="password" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>confirm password</label>
-                            </td>
-                            <td>
-                                <input type="password"  maxlength="10" id="confirmPassword" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                 <label>type</label>
-                            </td>
-                            <td>
-                                <select id="type" name="select">
-                                    <%
-                                       TYPE []allType=ManagerAccess.GetAllManagerTypes();
-                                       for (int i=0; i<allType.Length; i++)
-                                       { 
-                                    %>
+                        <table class="form">
+                            <tr>
+                                <td>
+                                    <label>account</label>
+                                </td>
+                                <td>
+                                    <input type="text" maxlength="10" class="success" id="account" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>password</label>
+                                </td>
+                                <td>
+                                    <input type="password" maxlength="10" id="password" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>confirm password</label>
+                                </td>
+                                <td>
+                                    <input type="password" maxlength="10" id="confirmPassword" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>type</label>
+                                </td>
+                                <td>
+                                    <select id="type" name="select">
+                                        <%
+                                            TYPE[] allType = ManagerAccess.GetAllManagerTypes();
+                                            for (int i = 0; i < allType.Length; i++)
+                                            { 
+                                        %>
                                         <option value="<%=allType[i].ID %>"><%=allType[i].DESCRIPTION %></option>
-                                    <%}%>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>permission</label>
-                            </td>
-                            <td>
-                                <%
-                                PERMISSION[] permission = ManagerAccess.GetAllPermissions();
-                                for (int i=0; i<permission.Length; i++)
-                                {                          
-                                %>
+                                        <%}%>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>permission</label>
+                                </td>
+                                <td>
+                                    <%
+                                        PERMISSION[] permission = ManagerAccess.GetAllPermissions();
+                                        for (int i = 0; i < permission.Length; i++)
+                                        {                          
+                                    %>
                                     <input type="checkbox" id="<%="permissionID"+i %>" onchange="changePermission(this)" /><%=permission[i].NAME %>
-                               <%}%>           
-                            </td>
-                        </tr>
-                    </table>  
+                                    <%}%>           
+                                </td>
+                            </tr>
+                        </table>
                     </form>
-                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left:250px;">确认</button>
+                    <button onclick="addManager(<%=permission.Length %>)" style="margin-left: 250px;">确认</button>
                 </div>
             </div>
         </div>

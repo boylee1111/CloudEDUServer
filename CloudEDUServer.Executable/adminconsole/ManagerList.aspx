@@ -108,14 +108,14 @@
             }
             isOperating = true;
             $.post("ManagerList.aspx", { operate: "edit", account: account }, function (data) {
-                    if (data == "success") {
-                        window.location.href = "EditManager.aspx";
-                    }
-                    else {
-                        alert(data);
-                    }
-                    isOperating = false;
-                });
+                if (data == "success") {
+                    window.location.href = "EditManager.aspx";
+                }
+                else {
+                    alert(data);
+                }
+                isOperating = false;
+            });
         }
     </script>
 </head>
@@ -163,7 +163,7 @@
                 </div>
 
                 <!--block div是datatable用来定位的，不要在里面放出了table以外的东西-->
-                <ul style="float:right">
+                <ul style="float: right">
                     <li><a href="AddManager.aspx">添加管理员</a></li>
                 </ul>
 

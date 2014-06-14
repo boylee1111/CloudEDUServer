@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -76,7 +76,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
         <%
             if (!ManagerAccess.haveDblogPermission((MANAGER)Session["manager"]))
@@ -89,29 +89,29 @@
             <div class="box round first grid">
                 <h2>Database Log</h2>
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th style="text-align:center">Opr</th>
-							<th style="text-align:center">Msg</th>
-							<th style="text-align:center">Opr Time</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            OPR_LOG[] log = ManagerAccess.GetAllDBLogs();
-                            for (int i=0; i<log.Length; i++)
-                            {
-                         %>
-						    <tr>
-							    <td style="text-align:center"><%=log[i].OPR %></td>
-							    <td style="text-align:center"><%=log[i].MSG%></td>
-							    <td style="text-align:center"><%=log[i].OPR_TIME %></td>	
-						    </tr>	
-                        <%  }%>		
-					</tbody>
-				    </table>                               
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Opr</th>
+                                <th style="text-align: center">Msg</th>
+                                <th style="text-align: center">Opr Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                OPR_LOG[] log = ManagerAccess.GetAllDBLogs();
+                                for (int i = 0; i < log.Length; i++)
+                                {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=log[i].OPR %></td>
+                                <td style="text-align: center"><%=log[i].MSG%></td>
+                                <td style="text-align: center"><%=log[i].OPR_TIME %></td>
+                            </tr>
+                            <%  }%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

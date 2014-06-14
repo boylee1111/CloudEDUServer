@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -76,9 +76,9 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
-       <%
+        <%
             if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
             {
                 Response.Redirect("Default.aspx");
@@ -89,8 +89,8 @@
             <div class="box round first grid">
                 <h2>Resource List</h2>
                 <div class="block">
-                     <%
-                        LESSON lesson=null;
+                    <%
+                        LESSON lesson = null;
                         try
                         {
                             lesson = CourseAccess.GetLessonByID(int.Parse(Request.Params.Get("lessonId")));
@@ -105,31 +105,31 @@
                             return;
                         }
                     %>
-					<table class="data display datatable">
-					<thead>
-						<tr>
-							<th style="text-align:center">Title</th>
-                            <th style="text-align:center">Intro</th>
-							<th style="text-align:center">Recourse Type</th>
-							<th style="text-align:center">resource.url</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <%
-                            RESOURCE[] resource = CourseAccess.GetResourcesByLesson(lesson);
-                            for (int i=0; i<resource.Length; i++)
-                            {
-                         %>
-						    <tr>
-							    <td style="text-align:center"><%=resource[i].TITLE %></td>
-                                <td style="text-align:center"><%=resource[i].INTRO %></td>
-							    <td style="text-align:center"><%=CourseAccess.GetResourceTypeByID(resource[i].TYPE).DESCRIPTION %></td>
-							    <td style="text-align:center"><%=resource[i].URL %></td>	
-                                
-						    </tr>	
-                        <% }%>
-					</tbody>
-				    </table>                               
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Intro</th>
+                                <th style="text-align: center">Recourse Type</th>
+                                <th style="text-align: center">resource.url</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%
+                                RESOURCE[] resource = CourseAccess.GetResourcesByLesson(lesson);
+                                for (int i = 0; i < resource.Length; i++)
+                                {
+                            %>
+                            <tr>
+                                <td style="text-align: center"><%=resource[i].TITLE %></td>
+                                <td style="text-align: center"><%=resource[i].INTRO %></td>
+                                <td style="text-align: center"><%=CourseAccess.GetResourceTypeByID(resource[i].TYPE).DESCRIPTION %></td>
+                                <td style="text-align: center"><%=resource[i].URL %></td>
+
+                            </tr>
+                            <% }%>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

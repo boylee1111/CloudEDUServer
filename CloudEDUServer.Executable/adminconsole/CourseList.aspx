@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -74,7 +74,7 @@
         });
 
         function showCourseInfo(courseID) {
-            window.location.href = "CourseInfo.aspx?courseId="+courseID;
+            window.location.href = "CourseInfo.aspx?courseId=" + courseID;
         }
 
         function courseListSelect() {
@@ -106,7 +106,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
         <%
             if (!ManagerAccess.haveCourseViewPermission((MANAGER)Session["manager"]))
@@ -125,7 +125,7 @@
                         <option value="cancel">Cancel Course</option>
                     </select>
                     <%
-                        if (Session["CourseListSelect"]==null)
+                        if (Session["CourseListSelect"] == null)
                         {
                             Session["CourseListSelect"] = "all";
                         }; 
@@ -134,74 +134,74 @@
                         document.getElementById('CourseListSelect').value = "<%=Session["CourseListSelect"]%>";
                     </script>
                 </h2>
-               
+
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-				            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Price</th>
-							
-                            <th style="text-align:center">Teacher</th>
-                            <th style="text-align:center">Category</th>
-                            <th style="text-align:center">Status</th>
-                            <th style="text-align:center">Pg</th>
-                            <th style="text-align:center">Iconurl</th>
-                            <th style="text-align:center">StartTime</th>
-                            <th style="text-align:center">Download</th>
-                            <th style="text-align:center">Infor</th>
-                            <th style="text-align:center">Comment</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <% 
-                            COURSE[] course =null;
-                    
-                            if (Session["CourseListSelect"].Equals("pending"))
-                            {
-                                course = CourseAccess.GetAllPendingCourses();
-                            }
-                            else if (Session["CourseListSelect"].Equals("cancel"))
-                            {
-                                course = CourseAccess.GetAllCancelCourses();
-                            }
-                            else if (Session["CourseListSelect"].Equals("ok"))
-                            {
-                                course = CourseAccess.GetAllOKCourses();
-                            }
-                            else
-                            {
-                                course = CourseAccess.GetAllCourses();
-                            }
-                                          
-                            for (int i=0; i<course.Length; i++)
-                            {
-                                if (ManagerAccess.haveCourseEditPermission((MANAGER)Session["manager"]))
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Price</th>
+
+                                <th style="text-align: center">Teacher</th>
+                                <th style="text-align: center">Category</th>
+                                <th style="text-align: center">Status</th>
+                                <th style="text-align: center">Pg</th>
+                                <th style="text-align: center">Iconurl</th>
+                                <th style="text-align: center">StartTime</th>
+                                <th style="text-align: center">Download</th>
+                                <th style="text-align: center">Infor</th>
+                                <th style="text-align: center">Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                COURSE[] course = null;
+
+                                if (Session["CourseListSelect"].Equals("pending"))
                                 {
-                         %>
-                            
-						        <tr ondblclick="editCourse('<%=course[i].ID %>')">
+                                    course = CourseAccess.GetAllPendingCourses();
+                                }
+                                else if (Session["CourseListSelect"].Equals("cancel"))
+                                {
+                                    course = CourseAccess.GetAllCancelCourses();
+                                }
+                                else if (Session["CourseListSelect"].Equals("ok"))
+                                {
+                                    course = CourseAccess.GetAllOKCourses();
+                                }
+                                else
+                                {
+                                    course = CourseAccess.GetAllCourses();
+                                }
+
+                                for (int i = 0; i < course.Length; i++)
+                                {
+                                    if (ManagerAccess.haveCourseEditPermission((MANAGER)Session["manager"]))
+                                    {
+                            %>
+
+                            <tr ondblclick="editCourse('<%=course[i].ID %>')">
                                 <%}
-                                  else
-                                  {%>
+                                    else
+                                    {%>
                                 <tr>
-                                 <%}%>
-							    <td style="text-align:center"><%=course[i].TITLE %></td>	
-							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
-                                <td style="text-align:center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>						    
-							    <td style="text-align:center"><%=CourseAccess.GetCategoryByID((int)course[i].CATEGORY).CATE_NAME %></td>
-                                <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
-							    <td style="text-align:center"><%=CourseAccess.GetParentGuideByID((int)course[i].PG).DESCRIPTION %></td>
-							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
-                                <td style="text-align:center"><%=course[i].START_TIME.ToShortDateString() %></td>						    
-							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
-                                <td style="text-align:center"><a href="#" onclick="showCourseInfo(<%=course[i].ID%>)">more</a></td>
-                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">评论</a></td>
-						    </tr>	
-                        <%  } %>	
-					</tbody>
-				    </table>                               
+                                    <%}%>
+                                    <td style="text-align: center"><%=course[i].TITLE %></td>
+                                    <td style="text-align: center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
+                                    <td style="text-align: center"><%=CustomerAccess.GetCustomerByID( course[i].TEACHER).NAME %></td>
+                                    <td style="text-align: center"><%=CourseAccess.GetCategoryByID((int)course[i].CATEGORY).CATE_NAME %></td>
+                                    <td style="text-align: center"><%=course[i].COURSE_STATUS %></td>
+                                    <td style="text-align: center"><%=CourseAccess.GetParentGuideByID((int)course[i].PG).DESCRIPTION %></td>
+                                    <td style="text-align: center"><%=course[i].ICON_URL %></td>
+                                    <td style="text-align: center"><%=course[i].START_TIME.ToShortDateString() %></td>
+                                    <td style="text-align: center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                    <td style="text-align: center"><a href="#" onclick="showCourseInfo(<%=course[i].ID%>)">more</a></td>
+                                    <td style="text-align: center"><a href="#" onclick="showComment('<%=course[i].ID %>')">评论</a></td>
+                                </tr>
+                                <%  } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

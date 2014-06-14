@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -68,12 +68,12 @@
     <script type="text/javascript">
         $(document).ready(function () {
             setupLeftMenu();
-            setSidebarHeight(); 
+            setSidebarHeight();
         });
 
 
         var isUpdate = false;
-        var id=<%=Request.Params.Get("id")%>
+        var id =<%=Request.Params.Get("id")%>
         function editUser() {
             if (isUpdate) {
                 alert("操作中，请稍后");
@@ -88,7 +88,7 @@
                 var degree = document.getElementById("degree").value;
                 var email = document.getElementById("email").value;
                 var birthday = document.getElementById("birthday").value;
-             
+
                 var isNewPassword = false;
                 if (password != "" || confirmPassword != "") isNewPassword = true;
 
@@ -102,7 +102,7 @@
                     isUpdate = false;
                     return;
                 }
-                else{
+                else {
 
                     if (!checkEmail(email)) {
                         alert("邮箱错误");
@@ -113,7 +113,7 @@
                     if (isNewPassword) {
                         password = hex_md5(password);
                     }
-                    jQuery.post("EditUser.aspx", {id:id, account: account, password: password, degree:degree,email:email,birthday:birthday }, function (data) {
+                    jQuery.post("EditUser.aspx", { id: id, account: account, password: password, degree: degree, email: email, birthday: birthday }, function (data) {
                         if (data == "success") {
                             isUpdate = false;
                             alert("管理员编辑成功");
@@ -150,7 +150,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <%
@@ -166,7 +166,7 @@
             </h2>
             <div class="box round first grid">
                 <%
-                    CUSTOMER customer = null; 
+                    CUSTOMER customer = null;
                     try
                     {
                         customer = CustomerAccess.GetCustomerByID(int.Parse(Request.Params.Get("id")));
@@ -184,91 +184,90 @@
                         else
                         {
                 %>
-                            <form>
-                            <table class="form">
-                                <tr>
-                                    <td>
-                                        <label>账号</label>
-                                    </td>
-                                    <td>
-                                        <input type="text" readonly value="<%=customer.NAME %>" maxlength="14" class="success" id="account"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>密码</label>
-                                    </td>
-                                    <td>
-                                        <input type="password" maxlength="14"  id="password" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>确认密码</label>
-                                    </td>
-                                    <td>
-                                        <input type="password"  maxlength="14" id="confirmPassword" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                         <label>Balance</label>
-                                    </td>
-                                    <td>
-                                        <label><%=customer.BALANCE %></label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                         <label>Degree</label>
-                                    </td>
-                                    <td>
-                                        <select id="degree"  name="select">
-                                            <option value="grad">Grad</option>
-                                            <option value="undergrad">Undergrad</option>
-                                            <option value="senior high">Senior High</option>
-                                            <option value="junior high">Junior High</option>
-                                            <option value="primaryschool">Primary School</option>
-                                            <option value="lower">Lower</option>
-                                            <option value=""></option>
-                                        </select>
+                <form>
+                    <table class="form">
+                        <tr>
+                            <td>
+                                <label>账号</label>
+                            </td>
+                            <td>
+                                <input type="text" readonly value="<%=customer.NAME %>" maxlength="14" class="success" id="account" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>密码</label>
+                            </td>
+                            <td>
+                                <input type="password" maxlength="14" id="password" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>确认密码</label>
+                            </td>
+                            <td>
+                                <input type="password" maxlength="14" id="confirmPassword" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Balance</label>
+                            </td>
+                            <td>
+                                <label><%=customer.BALANCE %></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Degree</label>
+                            </td>
+                            <td>
+                                <select id="degree" name="select">
+                                    <option value="grad">Grad</option>
+                                    <option value="undergrad">Undergrad</option>
+                                    <option value="senior high">Senior High</option>
+                                    <option value="junior high">Junior High</option>
+                                    <option value="primaryschool">Primary School</option>
+                                    <option value="lower">Lower</option>
+                                    <option value=""></option>
+                                </select>
 
-                                        <%
-                                            if (customer.DEGREE == null)
-                                            {
-                                                customer.DEGREE = "";
-                                            }
-                                            
-                                        %>
-                                        <script>
-                                            document.getElementById("degree").value = '<%=customer.DEGREE.Trim().ToLower() %>';     
-                                        </script>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>EMail</label>
-                                    </td>
-                                    <td>
-                                        <input type="text" id="email" value="<%=customer.EMAIL %>" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Birthday</label>
-                                    </td>
-                                    <td>
-                                        <input type="date" id="birthday"   value="<%=TransactionAccess.dateToString( customer.BIRTHDAY.ToShortDateString()) %>"/>
-                                    </td>
-                                </tr>
-                            </table>  
-                            </form>
-                            <button onclick="editUser()">确认</button>
-                        <%        
+                                <%
+                            if (customer.DEGREE == null)
+                            {
+                                customer.DEGREE = "";
                             }
-                         }
-                        %>
-
+                                            
+                                %>
+                                <script>
+                                    document.getElementById("degree").value = '<%=customer.DEGREE.Trim().ToLower() %>';     
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>EMail</label>
+                            </td>
+                            <td>
+                                <input type="text" id="email" value="<%=customer.EMAIL %>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Birthday</label>
+                            </td>
+                            <td>
+                                <input type="date" id="birthday" value="<%=TransactionAccess.dateToString( customer.BIRTHDAY.ToShortDateString()) %>" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <button onclick="editUser()">确认</button>
+                <%        
+                        }
+                    }
+                %>
             </div>
         </div>
         <div class="clear">

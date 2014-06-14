@@ -4,10 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Cloud Edu</title>
 
-     <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="css/layout.css" media="screen" />
@@ -92,7 +92,7 @@
 
 </head>
 <body id="Body1" runat="server">
-    <div class="container_12">    
+    <div class="container_12">
         <!--#include file="Navigation.aspx" -->
 
         <%
@@ -105,56 +105,55 @@
 
         <div class="grid_10">
             <div class="box round first grid">
-                <h2>
-                   Recommendation List
+                <h2>Recommendation List
                 </h2>
-               
+
                 <div class="block">
-                    
-					<table class="data display datatable">
-					<thead>
-						<tr>
-				            <th style="text-align:center">Title</th>
-							<th style="text-align:center">Price</th>							
-                            <th style="text-align:center">Teacher</th>
-                            <th style="text-align:center">Category</th>
-                            <th style="text-align:center">Status</th>
-                            <th style="text-align:center">Pg</th>
-                            <th style="text-align:center">Iconurl</th>
-                            <th style="text-align:center">startTime</th>
-                            <th style="text-align:center">download</th>
-                            <th style="text-align:center">comment</th>
-						</tr>
-					</thead>
-					<tbody>
-                        <% 
-                            COURSE[] course =null;
-                            try
-                            {
-                                course=CourseAccess.GetCoursesByRecommendation(CourseAccess.GetRecommendationByID(int.Parse(Request.Params.Get("id"))));
-                            }
-                            catch
-                            {
-                                course=CourseAccess.GetAllCourses();
-                            }
-                            for (int i=0; i<course.Length; i++) 
-                            {
-                         %>
-						    <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
-							    <td style="text-align:center"><%=course[i].TITLE %></td>	
-							    <td style="text-align:center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>							    
-                                <td style="text-align:center"><%=course[i].TEACHER %></td>						    
-							    <td style="text-align:center"><%=course[i].CATEGORY %></td>
-                                <td style="text-align:center"><%=course[i].COURSE_STATUS %></td>
-							    <td style="text-align:center"><%=course[i].PG %></td>
-							    <td style="text-align:center"><%=course[i].ICON_URL %></td>	
-                                <td style="text-align:center"><%=course[i].START_TIME %></td>						    
-							    <td style="text-align:center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
-                                <td style="text-align:center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
-						    </tr>	
-                        <%  } %>	
-					</tbody>
-				    </table>                               
+
+                    <table class="data display datatable">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">Title</th>
+                                <th style="text-align: center">Price</th>
+                                <th style="text-align: center">Teacher</th>
+                                <th style="text-align: center">Category</th>
+                                <th style="text-align: center">Status</th>
+                                <th style="text-align: center">Pg</th>
+                                <th style="text-align: center">Iconurl</th>
+                                <th style="text-align: center">startTime</th>
+                                <th style="text-align: center">download</th>
+                                <th style="text-align: center">comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                COURSE[] course = null;
+                                try
+                                {
+                                    course = CourseAccess.GetCoursesByRecommendation(CourseAccess.GetRecommendationByID(int.Parse(Request.Params.Get("id"))));
+                                }
+                                catch
+                                {
+                                    course = CourseAccess.GetAllCourses();
+                                }
+                                for (int i = 0; i < course.Length; i++)
+                                {
+                            %>
+                            <tr ondblclick="showCourseInfo(<%=course[i].ID %>)">
+                                <td style="text-align: center"><%=course[i].TITLE %></td>
+                                <td style="text-align: center"><%=course[i].PRICE.ToString().Substring(0,course[i].PRICE.ToString().Length-2) %></td>
+                                <td style="text-align: center"><%=course[i].TEACHER %></td>
+                                <td style="text-align: center"><%=course[i].CATEGORY %></td>
+                                <td style="text-align: center"><%=course[i].COURSE_STATUS %></td>
+                                <td style="text-align: center"><%=course[i].PG %></td>
+                                <td style="text-align: center"><%=course[i].ICON_URL %></td>
+                                <td style="text-align: center"><%=course[i].START_TIME %></td>
+                                <td style="text-align: center"><%=CourseAccess.GetDownloadTimeByCourseID(course[i].ID) %></td>
+                                <td style="text-align: center"><a href="#" onclick="showComment('<%=course[i].ID %>')">查看评论</a></td>
+                            </tr>
+                            <%  } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
