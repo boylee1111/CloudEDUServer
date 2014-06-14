@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -11,7 +6,6 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-        
             try
             {
                 string account = Request.Params.Get("account");
@@ -38,7 +32,6 @@ namespace CloudEDUServer.adminconsole
                     Response.End();
                 }
 
-
                 MANAGER newManager = new MANAGER();
                 newManager.NAME = account;
                 newManager.PASSWORD = password;
@@ -59,7 +52,7 @@ namespace CloudEDUServer.adminconsole
                                 ManagerAccess.GrantPermissionToManager(newManager.ID, allPermission[i].ID);
                                 permissionNum -= (1 << i);
                             }
-                        }                      
+                        }
                     }
                     catch
                     {

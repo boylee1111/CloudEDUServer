@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -21,8 +16,8 @@ namespace CloudEDUServer.adminconsole
                         int id = int.Parse(idStr);
                         Session["editCourse"] = CourseAccess.GetCourseById(id);
 
-                        CATEGORY category=new CATEGORY();
-                        category.CATE_NAME=Request.Params.Get("title");
+                        CATEGORY category = new CATEGORY();
+                        category.CATE_NAME = Request.Params.Get("title");
                         CourseAccess.AddCategory(category);
                     }
                     catch
@@ -35,7 +30,7 @@ namespace CloudEDUServer.adminconsole
                 }
 
 
-                COURSE course=null;
+                COURSE course = null;
                 try
                 {
                     string idStr = Request.Params.Get("id");
@@ -66,8 +61,8 @@ namespace CloudEDUServer.adminconsole
                 }
                 try
                 {
-                    CATEGORY[] category=CourseAccess.GetAllCategories();
-                    int categoryInt=int.Parse(Request.Params.Get("category"));
+                    CATEGORY[] category = CourseAccess.GetAllCategories();
+                    int categoryInt = int.Parse(Request.Params.Get("category"));
                     course.CATEGORY = category[categoryInt].ID;
                 }
                 catch
@@ -75,7 +70,7 @@ namespace CloudEDUServer.adminconsole
                     Response.Write("类型错误");
                     Response.End();
                 }
-                
+
                 try
                 {
                     CourseAccess.UpdateCourse(course);

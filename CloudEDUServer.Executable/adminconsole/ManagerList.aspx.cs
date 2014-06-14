@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using CloudEDUServer;
-using System.Web.Services;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -15,7 +8,7 @@ namespace CloudEDUServer.adminconsole
         {
             try
             {
-                string operate=Request.Params.Get("operate");
+                string operate = Request.Params.Get("operate");
                 MANAGER selfManage = (MANAGER)Session["manager"];
 
                 if (operate.Equals("viewPermissionManager"))
@@ -26,9 +19,7 @@ namespace CloudEDUServer.adminconsole
                     Session["viewPermissionManagers"] = managers;
                     Response.Write("success");
                     Response.End();
-
                 }
-
 
                 if (operate.Equals("delete"))
                 {
@@ -38,7 +29,7 @@ namespace CloudEDUServer.adminconsole
                     //{
                     //    Response.Write("权限不足");
                     //    Response.End();
-                        
+
                     //}
                     if (deleteManager == null)
                     {
@@ -64,8 +55,8 @@ namespace CloudEDUServer.adminconsole
 
                 if (operate.Equals("edit"))
                 {
-                    string account=Request.Params.Get("account");
-                    MANAGER editManager =null;
+                    string account = Request.Params.Get("account");
+                    MANAGER editManager = null;
                     try
                     {
                         editManager = ManagerAccess.GetManagerByName(account);
@@ -90,12 +81,12 @@ namespace CloudEDUServer.adminconsole
                     }
                 }
 
-        
+
 
             }
             catch (Exception ee)
             {
-          
+
             }
         }
     }

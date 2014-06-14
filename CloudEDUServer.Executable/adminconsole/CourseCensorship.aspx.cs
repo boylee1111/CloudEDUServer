@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -11,10 +6,10 @@ namespace CloudEDUServer.adminconsole
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-             try
+            try
             {
-                int id=int.Parse(Request.Params.Get("courseId"));
-                string stateStr=Request.Params.Get("courseState");
+                int id = int.Parse(Request.Params.Get("courseId"));
+                string stateStr = Request.Params.Get("courseState");
                 if (stateStr.Equals("OK"))
                 {
                     CourseAccess.UpdateCourseStatus(id, CourseStatus.OK);
@@ -27,7 +22,6 @@ namespace CloudEDUServer.adminconsole
                 {
                     CourseAccess.UpdateCourseStatus(id, CourseStatus.CANCEL);
                 }
-                
             }
             catch
             {

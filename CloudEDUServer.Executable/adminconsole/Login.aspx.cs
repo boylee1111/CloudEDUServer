@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using CloudEDUServer;
-using System.Web.Services;
-using System.Reflection;
+﻿using CloudEDUServer;
+using System;
 
 namespace cloudEdu
 {
@@ -18,7 +11,7 @@ namespace cloudEdu
             {
                 string account = Request.Params.Get("account");
                 string password = Request.Params.Get("password");
-                
+
                 if (account == null || password == null)
                 {
                     return;
@@ -32,9 +25,9 @@ namespace cloudEdu
                     }
                     catch
                     {
-                       Response.Write("连接错误，请重新试");
-                       Response.End();
-                       return;
+                        Response.Write("连接错误，请重新试");
+                        Response.End();
+                        return;
                     }
                     if (manager == null)
                     {

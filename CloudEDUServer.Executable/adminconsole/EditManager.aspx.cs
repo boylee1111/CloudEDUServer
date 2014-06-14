@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -15,7 +10,7 @@ namespace CloudEDUServer.adminconsole
             {
                 string account = Request.Params.Get("account");
                 string password = Request.Params.Get("password");
-                int permissionNum =int.Parse( Request.Params.Get("permission"));
+                int permissionNum = int.Parse(Request.Params.Get("permission"));
                 if (account == null || password == null)
                 {
                     return;
@@ -51,7 +46,7 @@ namespace CloudEDUServer.adminconsole
                             permissionNum -= (1 << i);
                         }
                     }
-                    manager.MNGR_TYPE =int.Parse( Request.Params.Get("type"));
+                    manager.MNGR_TYPE = int.Parse(Request.Params.Get("type"));
                     ManagerAccess.UpdateManager(manager);
                 }
                 catch

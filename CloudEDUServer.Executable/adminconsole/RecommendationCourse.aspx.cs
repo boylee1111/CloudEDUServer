@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -16,7 +11,7 @@ namespace CloudEDUServer.adminconsole
                 string operate = Request.Params.Get("operate");
                 if (operate == null || operate.Equals(""))
                 {
-                    return ;
+                    return;
                 }
                 if (operate.Equals("editRecommendation"))
                 {

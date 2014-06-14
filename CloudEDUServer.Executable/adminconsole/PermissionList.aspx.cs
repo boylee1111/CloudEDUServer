@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -14,23 +9,23 @@ namespace CloudEDUServer.adminconsole
             try
             {
                 string operate = Request.Params.Get("operate");
-              
-
-         
 
 
-                if (operate!=null && operate.Equals("search"))
+
+
+
+                if (operate != null && operate.Equals("search"))
                 {
                     try
                     {
                         int result = int.Parse(Request.Params.Get("result"));
-                        
+
                         PERMISSION[] allPermission = ManagerAccess.GetAllPermissions();
                         PERMISSION[] perm;
-                        int searchCount=0;
+                        int searchCount = 0;
                         for (int i = 0; i < allPermission.Length; i++)
                         {
-                            if (  (result & (1 << i)) != 0) 
+                            if ((result & (1 << i)) != 0)
                             {
                                 searchCount++;
                             }
@@ -46,7 +41,7 @@ namespace CloudEDUServer.adminconsole
                             }
                         }
                         Session["permission_name"] = perm;
-                        
+
                     }
                     catch
                     {
@@ -56,13 +51,13 @@ namespace CloudEDUServer.adminconsole
                     Response.Write("success");
                     Response.End();
                 }
-                
+
 
                 if (operate.Equals("edit"))
                 {
                     string account = Request.Params.Get("account");
-                   
-                    
+
+
                     MANAGER editManager = null;
                     try
                     {
@@ -80,7 +75,7 @@ namespace CloudEDUServer.adminconsole
                     }
                     else
                     {
-                      
+
                         Response.Write("success");
                         Response.End();
                     }
