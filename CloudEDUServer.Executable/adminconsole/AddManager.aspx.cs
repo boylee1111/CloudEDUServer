@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -59,6 +60,10 @@ namespace CloudEDUServer.adminconsole
                         Response.Write("权限添加失败");
                         Response.End();
                     }
+                    ThreadStart logStarter = () => DBNewManagerLog(newManager);
+                    Thread logThread = new Thread(logStarter);
+                    logThread.Start();
+
                     Response.Write("success");
                     Response.End();
                 }
@@ -71,6 +76,13 @@ namespace CloudEDUServer.adminconsole
             catch
             {
             }
+        }
+
+        private void DBNewManagerLog(MANAGER newManager)
+        {
+            OPR_LOG newLog = new OPR_LOG();
+            newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "添加管理员" + newManager.NAME;
+            ManagerAccess.AddDBLog(newLog);
         }
     }
 }

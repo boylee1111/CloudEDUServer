@@ -10,10 +10,6 @@ namespace CloudEDUServer.adminconsole
             {
                 string operate = Request.Params.Get("operate");
 
-
-
-
-
                 if (operate != null && operate.Equals("search"))
                 {
                     try
@@ -75,16 +71,12 @@ namespace CloudEDUServer.adminconsole
                     }
                     else
                     {
-
                         Response.Write("success");
                         Response.End();
                     }
                 }
-
-
-
             }
-            catch (Exception ee)
+            catch (Exception)
             {
 
             }

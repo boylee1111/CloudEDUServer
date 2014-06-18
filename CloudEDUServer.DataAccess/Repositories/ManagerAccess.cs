@@ -238,6 +238,24 @@ namespace CloudEDUServer
             return count == 1;
         }
 
+        public static bool AddDBLog(OPR_LOG log)
+        {
+            int count = 0;
+            using (CloudEDUEntities ctx = new CloudEDUEntities())
+            {
+                try
+                {
+                    ctx.OPR_LOG.Add(log);
+                    count = ctx.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return count == 1;
+        }
+
         /// <summary>
         /// 用于更改Manager的一般信息，包括NAME和PASSWORD，不可用于更改PERMISSION和TYPE
         /// </summary>
