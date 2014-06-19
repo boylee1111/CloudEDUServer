@@ -1,0 +1,52 @@
+// ManagerPermATLCom.idl : IDL source for ManagerPermATLCom
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ManagerPermATLCom.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(D8E63B08-9F53-4139-ADE8-EE4FD5589369),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IPermCom : IDispatch{
+	[id(1)] HRESULT PermCalculate([in] VARIANT_BOOL a_bFireEvent, [out, retval] LONG* a_lTotalPerms);
+	[propget, id(2)] HRESULT ComPerms([out, retval] LONG* pVal);
+	[propput, id(2)] HRESULT ComPerms([in] LONG newVal);
+	[propget, id(3)] HRESULT AtlPerms([out, retval] LONG* pVal);
+	[propput, id(3)] HRESULT AtlPerms([in] LONG newVal);
+	[propget, id(4)] HRESULT ManagerName([out, retval] BSTR* pVal);
+	[propput, id(4)] HRESULT ManagerName([in] BSTR newVal);
+};
+[
+	uuid(A62DA742-F69F-434A-BAE4-AF9E18623B63),
+	version(1.0),
+]
+library ManagerPermATLComLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(94603AC0-64D2-4E75-A677-80824E973842)		
+	]
+	dispinterface _IPermComEvents
+	{
+		properties:
+		methods:
+			[id(1)] HRESULT TotalPerms();
+			[id(2)] HRESULT TotalPermissions(LONG a_lTotalPerms);
+	};
+	[
+		uuid(244EE4AF-3919-4E1E-9DB4-BDD7BC13FFDB)		
+	]
+	coclass PermCom
+	{
+		[default] interface IPermCom;
+		[default, source] dispinterface _IPermComEvents;
+	};
+};
+
