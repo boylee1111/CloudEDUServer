@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CloudEDUServer.Executable.adminconsole;
+using System;
+using System.Threading;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -11,16 +13,21 @@ namespace CloudEDUServer.adminconsole
                 string operate = Request.Params.Get("operate");
                 if (operate != null && operate != "")
                 {
+                    int id = int.Parse(Request.Params.Get("id"));
+                    COMMENT toDeleteComment = CourseAccess.GetCommentByID(id);
                     try
                     {
-                        int id = int.Parse(Request.Params.Get("id"));
-                        CourseAccess.RemoveComment(CourseAccess.GetCommentByID(id));
+                        CourseAccess.RemoveComment(toDeleteComment);
                     }
                     catch
                     {
                         Response.Write("删除失败");
                         Response.End();
                     }
+                    ThreadStart logStarter = () => DBDeleteCommentLog(toDeleteComment);
+                    Thread logThread = new Thread(logStarter);
+                    logThread.Start();
+
                     Response.Write("success");
                     Response.End();
                 }
@@ -41,7 +48,13 @@ namespace CloudEDUServer.adminconsole
             catch
             {
             }
-
+        }
+        private void DBDeleteCommentLog(COMMENT toDeleteComment)
+        {
+            OPR_LOG newLog = new OPR_LOG();
+            newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "删除评论" + toDeleteComment.CONTENT;
+            ManagerAccess.AddDBLog(newLog);
+            DiagnosticCarrier.Instance.LogForMessage(newLog.MSG);
         }
     }
 }

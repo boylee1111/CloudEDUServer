@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CloudEDUServer.Executable.adminconsole;
+using System;
 using System.Threading;
 
 namespace CloudEDUServer.adminconsole
@@ -83,6 +84,8 @@ namespace CloudEDUServer.adminconsole
             OPR_LOG newLog = new OPR_LOG();
             newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "添加管理员" + newManager.NAME;
             ManagerAccess.AddDBLog(newLog);
+            DiagnosticCarrier.Instance.LogForMessage(newLog.MSG);
+            DiagnosticCarrier.Instance.LogForMessageWithFile(newLog.MSG, "Manager");
         }
     }
 }

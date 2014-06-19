@@ -1,5 +1,7 @@
 ﻿using CloudEDUServer;
+using CloudEDUServer.Executable.adminconsole;
 using System;
+using System.Threading;
 
 namespace cloudEdu
 {
@@ -36,6 +38,10 @@ namespace cloudEdu
                     }
                     else if (manager.PASSWORD.Equals(password))
                     {
+                        ThreadStart logStarter = () => DBManagerLoginLog(manager);
+                        Thread logThread = new Thread(logStarter);
+                        logThread.Start();
+
                         Session["manager"] = manager;
                         Response.Write("success");
                         Response.End();
@@ -50,7 +56,15 @@ namespace cloudEdu
             catch
             {
             }
+        }
 
+        private void DBManagerLoginLog(MANAGER manager)
+        {
+            OPR_LOG newLog = new OPR_LOG();
+            newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "管理员" + manager.NAME + "登录";
+            ManagerAccess.AddDBLog(newLog);
+            DiagnosticCarrier.Instance.LogForMessage(newLog.MSG);
+            DiagnosticCarrier.Instance.LogForMessageWithFile(newLog.MSG, "Manager");
         }
     }
 }

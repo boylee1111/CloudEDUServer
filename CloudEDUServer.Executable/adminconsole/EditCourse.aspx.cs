@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CloudEDUServer.Executable.adminconsole;
+using System;
+using System.Threading;
 
 namespace CloudEDUServer.adminconsole
 {
@@ -10,10 +12,10 @@ namespace CloudEDUServer.adminconsole
             {
                 if (Request.Params.Get("operate").Equals("new"))
                 {
+                    string idStr = Request.Params.Get("id");
+                    int id = int.Parse(idStr);
                     try
                     {
-                        string idStr = Request.Params.Get("id");
-                        int id = int.Parse(idStr);
                         Session["editCourse"] = CourseAccess.GetCourseById(id);
 
                         CATEGORY category = new CATEGORY();
@@ -25,6 +27,10 @@ namespace CloudEDUServer.adminconsole
                         Response.Write("新建错误,可能存在问题：已经存在该类型");
                         Response.End();
                     }
+                    ThreadStart logStarter = () => DBNewCategoryLog(id);
+                    Thread logThread = new Thread(logStarter);
+                    logThread.Start();
+
                     Response.Write("success");
                     Response.End();
                 }
@@ -86,6 +92,14 @@ namespace CloudEDUServer.adminconsole
             catch
             {
             }
+        }
+        private void DBNewCategoryLog(int newCategoryId)
+        {
+            CATEGORY newCategory = CourseAccess.GetCategoryByID(newCategoryId);
+            OPR_LOG newLog = new OPR_LOG();
+            newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "新建目录" + newCategory.CATE_NAME;
+            ManagerAccess.AddDBLog(newLog);
+            DiagnosticCarrier.Instance.LogForMessage(newLog.MSG);
         }
     }
 }

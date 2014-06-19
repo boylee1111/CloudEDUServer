@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CloudEDUServer.Executable.adminconsole;
+using System;
 using System.Threading;
 using System.Web.UI;
 
@@ -39,6 +40,8 @@ namespace CloudEDUServer.adminconsole
             COURSE updatedCourse = CourseAccess.GetCourseById(courseId);
             OPR_LOG newLog = new OPR_LOG();
             newLog.MSG = "于" + DateTime.Now.ToString("yyyy/MM/dd") + "更改课程" + updatedCourse.TITLE + "状态为" + updatedCourse.COURSE_STATUS;
+            ManagerAccess.AddDBLog(newLog);
+            DiagnosticCarrier.Instance.LogForMessage(newLog.MSG);
         }
     }
 }
